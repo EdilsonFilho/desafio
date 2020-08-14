@@ -65,9 +65,13 @@ def main():
     ### Menu de opcoes
     #maior, menor e média de compras
     if option == 1:
-      print('Valor maior é R$ {:.2f}\n'.format(maior))
-      print('Valor menor é R$ {:.2f}\n'.format(menor))
-      print('Valor médio das compras: R$ {:.2f}\n'.format(s/10,2))
+      print('_____________________________________________________')
+      print('|Para a pesquisa sobre valores usados em 2019 temos:|')
+      print('|---------------------------------------------------|')
+      print('|Valor maior é R$ {:.2f}|'.format(maior))
+      print('|Valor menor é R$ {:.2f}|'.format(menor))
+      print('|Valor médio das compras: R$ {:.2f}|'.format(s/10,2))
+      print('|---------------------------------------------------|\n')
       option = 7
 
     #fornecedor mais frequente
@@ -86,13 +90,22 @@ def main():
 
     #quantidade de itens por compra
     if option == 3:
-     print('Somatório dos valores: R$ {}\n'.format(s))
-     option = 7
+     
+      for r in rows:
+        
+            print(f"A compra com o fornecedor  {r[2]} teve a quantidade de {r[3]} itens")
+            print('--------------------------------------------------------------------\n')
+            option = 7
 
     #numero de serivo e material contradados
     if option == 4:
        
-        option = 7
+       for r in rows:
+            print(f"Forncedor {r[2]}") 
+            print(f"Numero de servico {r[4 ]}")
+            print(f"Material contratado foi {r[5]}")
+            print('--------------------------------------------------------------------\n')
+            option = 7
 
     #Infomacao extra
     if option == 5:

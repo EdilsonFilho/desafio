@@ -19,9 +19,9 @@ def main():
     requ = requests.get('http://compras.dados.gov.br/compraSemLicitacao/doc/item_slicitacao/15871907000012019/itens.json')
     tit = json.loads(requ.text)
     tot = tit['_embedded']
-    #tat = tot['compras']
+    tat = tot['compras']
 
-    print(tot['compras'][1]['co_servico'][2])
+    print(tit['_embedded']['compras'][0]['ds_detalhada'])
     
    
 

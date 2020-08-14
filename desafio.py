@@ -4,6 +4,7 @@ import psycopg2
 import json
 from psycopg2 import Error
 from pprint import pprint
+from sqlalchemy.sql import func
 
 
 
@@ -26,6 +27,7 @@ def main():
     cursor = con.cursor()
     cursor.execute("select valor,itens,fornecedor,quantidade, n_servico,materiais_contratados from compras_slicitacao;")
     rows = cursor.fetchall()
+    
 
     print(' VISAO GERAL DA PESQUISA')
     print(' COM 10 COMPRAS REALIZADAS SEM LICITACAO PERIODO DE 2019')
@@ -35,6 +37,20 @@ def main():
         print(f"O fornecedor é: {r[2]}, a quantidade é : {r[3]}")
         print(f"O número de serviço é : {r[4]}, e o material contratado é : {r[5]}")
         print('--------------------------------------------------------------------')
+    
+    s = 0
+    for c in rows:
+        n = c[0]
+        s += n
+    print('Somatório dos valores: R$ {}'.format(s))
+    print('Valro médio das compras: R$ {}'.format(s/10))
+
+    for c in rows:
+        n = c[0]
+        
+    print('Somatório dos valores: R$ {}'.format(s))
+    print('Valro médio das compras: R$ {}'.format(s/10))
+
 
 
     '''
@@ -56,6 +72,7 @@ def main():
         print(tit['_embedded']['compras'][0]['_links']['self'])
         print('--- FIM DE Mostrando FORNECEDOR-----')
     '''
+     
     
     
     con.close()

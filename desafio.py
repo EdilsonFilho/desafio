@@ -30,7 +30,7 @@ print("\n\n")
 
 def main():
     
-    option = int(input('Qual consulta desejas realizar?\n 1.Maior, menor e média cas compras\n 2.Fornecedor mais frequente\n 3.Quantidade de itens por compra\n 4.Numero de servicos e materiais contratados\n 5. Informações gerais\n 6.Sair\n'))
+    option = int(input('Qual consulta desejas realizar?\n 1.Maior, menor e média cas compras\n 2.Fornecedor mais frequente\n 3.Quantidade de itens por compra\n 4.Numero de servicos e materiais contratados\n 5. Informações gerais\n 6.Sair e gerar relatorio em .txt\n'))
 
     cursor = con.cursor()
     cursor.execute("select valor,itens,fornecedor,quantidade, n_servico,materiais_contratados from compras_slicitacao;")
@@ -119,6 +119,16 @@ def main():
     if option == 6:
         print('SAINDO DA APLICAÇÃO')
         print('-------------------')
+        arquivo = open('relatorio_consultas.txt','w')
+        arquivo.write("                         RELATORIO RAPIDO DAS CONSUTLAS\n\n")
+        for r in rows:
+            arquivo.write(f"valor R$ {r[0]} e o link do iten está em: {r[1]}\n")
+            arquivo.write(f"O fornecedor é: {r[2]}, a quantidade é : {r[3]}\n")
+            arquivo.write(f"O número de serviço é : {r[4]}, e o material contratado é : {r[5]}\n")
+            arquivo.write('--------------------------------------------------------------------\n\n')
+        arquivo.close()
+
+
     if option == 7:
         main()
    

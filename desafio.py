@@ -5,6 +5,7 @@ import json
 from psycopg2 import Error
 from pprint import pprint
 from sqlalchemy.sql import func
+from collections import defaultdict
 
 
 
@@ -29,7 +30,7 @@ print("\n\n")
 
 def main():
     
-    option = int(input('Qual consulta desejas realizar?\n 1.Maior valor de licitacao\n 2.Menor valor de licitacao\n 3.Soma total do valor usado sem licitacao em 2019\n 4.Média do valor usado sem licitacao em 2019\n 5. Informações gerais\n 6.Sair\n'))
+    option = int(input('Qual consulta desejas realizar?\n 1.Maior, menor e média cas compras\n 2.Fornecedor mais frequente\n 3.Quantidade de itens por compra\n 4.Numero de servicos e materiais contratados\n 5. Informações gerais\n 6.Sair\n'))
 
     cursor = con.cursor()
     cursor.execute("select valor,itens,fornecedor,quantidade, n_servico,materiais_contratados from compras_slicitacao;")
@@ -38,6 +39,9 @@ def main():
     6
     maior=0
     menor=0
+    fornecedor = []
+    ###processamento das consultas 
+
     #optcao de consulta para maior e menor
     for c in rows:
         aux =  c[0]
@@ -50,20 +54,47 @@ def main():
     for c in rows:
         n = c[0]
         s += n
+    #fornecedor mais frequente
+    for c in rows:
+        fornecedor.append(c[2])
+        #print(fornecedor)
 
+    
+
+
+    ### Menu de opcoes
+    #maior, menor e média de compras
     if option == 1:
       print('Valor maior é R$ {:.2f}\n'.format(maior))
-      option = 7
-    if option == 2:
       print('Valor menor é R$ {:.2f}\n'.format(menor))
+      print('Valor médio das compras: R$ {:.2f}\n'.format(s/10,2))
       option = 7
+
+    #fornecedor mais frequente
+    if option == 2:
+      keys = defaultdict(list)
+
+      for key, value in enumerate(fornecedor):
+          keys[value].append(key)
+    
+        # Exibe o resultado:
+      for value in keys:
+        if len(keys[value]) > 1:
+            print('Fornecedor mais frequente é: {}'.format(value))
+      print('------------------------------------------------------------------------------------')
+      option = 7
+
+    #quantidade de itens por compra
     if option == 3:
      print('Somatório dos valores: R$ {}\n'.format(s))
      option = 7
+
+    #numero de serivo e material contradados
     if option == 4:
-        print('Valor médio das compras: R$ {:.2f}\n'.format(s/10))
+       
         option = 7
 
+    #Infomacao extra
     if option == 5:
         for r in rows:
         

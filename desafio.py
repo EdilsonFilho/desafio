@@ -30,7 +30,7 @@ print("\n\n")
 
 def main():
     
-    option = int(input('Qual consulta desejas realizar?\n 1.Maior, menor e média cas compras\n 2.Fornecedor mais frequente\n 3.Quantidade de itens por compra\n 4.Numero de servicos e materiais contratados\n 5. Informações gerais\n 6.Sair e gerar relatorio em .txt\n'))
+    option = int(input('Qual consulta desejas realizar?\n 1.Maior, menor e média das compras\n 2.Fornecedor mais frequente\n 3.Quantidade de itens por compra\n 4.Numero de servicos e materiais contratados\n 5. Informações gerais\n 6.Sair e gerar relatorio em .txt\n'))
 
     cursor = con.cursor()
     cursor.execute("select valor,itens,fornecedor,quantidade, n_servico,materiais_contratados from compras_slicitacao;")

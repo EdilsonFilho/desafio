@@ -21,13 +21,23 @@ def main():
         host = "localhost",
         port = "5432",
         dbname = "postgres")
-    print("Successfully connected!")
+    print("CONEXÃO COM BD DO POSTGRESQL REALIZADA COM SUCESSO!")
 
     cursor = con.cursor()
-    cursor.execute("select valor,itens from compras_slicitacao;")
-   
+    cursor.execute("select valor,itens,fornecedor,quantidade, n_servico,materiais_contratados from compras_slicitacao;")
     rows = cursor.fetchall()
-    
+
+    print(' VISAO GERAL DA PESQUISA')
+    print(' COM 10 COMPRAS REALIZADAS SEM LICITACAO PERIODO DE 2019')
+    for r in rows:
+       
+        print(f"valor R$ {r[0]} e o link do iten está em: {r[1]}")
+        print(f"O fornecedor é: {r[2]}, a quantidade é : {r[3]}")
+        print(f"O número de serviço é : {r[4]}, e o material contratado é : {r[5]}")
+        print('--------------------------------------------------------------------')
+
+
+    '''
     for r in rows:
         print(f"valor R$ {r[0]} e o descritivo do iten está em: {r[1]}")
         request = requests.get('http://compras.dados.gov.br{}.json'.format(r[1]))
@@ -45,7 +55,8 @@ def main():
         print('---Mostrando FORNECEDOR-----')
         print(tit['_embedded']['compras'][0]['_links']['self'])
         print('--- FIM DE Mostrando FORNECEDOR-----')
-
+    '''
+    
     
     con.close()
     
